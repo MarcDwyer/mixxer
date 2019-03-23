@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Homepage from '../homepage/homepage'
+import Videoplayer from '../streamer-page/videoplayer'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+
 export interface LiveStreams {
     title: string;
     name: string;
@@ -27,31 +29,34 @@ export interface AllStreams {
 interface State {
     live: AllStreams | null;
     ws: WebSocket;
-    selected: LiveStreams | null;
 }
 class Main extends Component<{}, State> {
     state = {
         live: null,
-        ws: new WebSocket(`ws://${document.location.hostname}:5000/sockets/`),
-        selected: null
+        ws: new WebSocket(`ws://${document.location.hostname}:5000/sockets/`)
     }
     componentDidMount() {
-        const { ws } = this.state 
-         
+        const { ws } = this.state
+
         ws.addEventListener('message', (msg) => {
-            const payload = JSON.parse(msg.data)
-            this.setState({live: payload})
+            const payload: LiveStreams[] = JSON.parse(msg.data)
+            const newPayload: AllStreams = payload.reduce((obj: AllStreams, item) => {
+                obj[item.name] = item
+                return obj
+            }, {})
+            this.setState({ live: newPayload })
         })
     }
     render() {
         const { live } = this.state
         return (
             <BrowserRouter>
-                <Switch>
-                    {live && (
-                        <Route path="/" render={(props) => <Homepage {...props} live={this.state.live} /> } />
-                    )}
-                </Switch>
+                {live && (
+                    <Switch>
+                        <Route path="/:id" render={(props) => <Videoplayer {...props} live={this.state.live} />} />
+                        <Route path="/" render={(props) => <Homepage {...props} live={this.state.live} />} />
+                    </Switch>
+                )}
             </BrowserRouter>
         )
     }

@@ -2,11 +2,10 @@
     width: 1440px;
     margin-left: auto;
     margin-right: auto;
-    border: solid 1px red;
 
 .card-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    column-gap: 25px;
+    column-gap: 10px;
 }
 }
