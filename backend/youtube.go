@@ -57,7 +57,7 @@ type Newlive struct {
 	ChannelID   *string    `json:"channelId"`
 	Title       *string    `json:"title"`
 	Description *string    `json:"description,omitempty"`
-	Viewers     *int       `json:"viewers"`
+	Viewers     int        `json:"viewers"`
 	Likes       *string    `json:"likes,omitempty"`
 	Dislikes    *string    `json:"dislikes,omitempty"`
 	VideoID     *string    `json:"videoId, omitempty"`
@@ -65,6 +65,7 @@ type Newlive struct {
 	DisplayName *string    `json:"displayName,omitempty"`
 	IsPlaying   *string    `json:"isPlaying,omitempty"`
 	Mature      *bool      `json:"mature, omitempty"`
+	Online      bool       `json:"online"`
 	Type        string     `json:"type"`
 }
 type TheStreamers map[string]Streamer
@@ -92,29 +93,6 @@ var streamers = []Streamer{
 	{Name: "Hyphonix", Type: "twitch", ImageID: "hyphonixtwitch.jpeg"},
 	{Name: "staysafetv", Type: "twitch", ImageID: "staysafetv.jpeg"},
 	{Name: "jaycgee", Type: "twitch", ImageID: "jaycgee.jpeg"},
-}
-var streamerObj = TheStreamers{
-	"IcePoseidon":         {Name: "Ice Poseidon", ChannelId: "UCv9Edl_WbtbPeURPtFDo-uA", ImageID: "ice.jpg", Type: "youtube"},
-	"Hyphonix":            {Name: "Hyphonix", ChannelId: "UCaFpm67qMk1W1wJkFhGXucA", ImageID: "hyphonix.jpg", Type: "youtube"},
-	"Gary":                {Name: "Gary", ChannelId: "UCvxSwu13u1wWyROPlCH-MZg", ImageID: "gary.jpg", Type: "youtube"},
-	"Cxnews":              {Name: "Cxnews", ChannelId: "UCStEQ9BjMLjHTHLNA6cY9vg", ImageID: "cxnews.jpg", Type: "youtube"},
-	"Juan Bagnell":        {Name: "Juan Bagnell", ChannelId: "UCvhnYODy6WQ0mw_zi3V1h0g", ImageID: "juan.jpg", Type: "youtube"},
-	"CodingTrain":         {Name: "Coding Train", ChannelId: "UCvjgXvBlbQiydffZU7m1_aw", ImageID: "coding.jpg", Type: "youtube"},
-	"JoeRoganPodcast":     {Name: "Joe Rogan Podcast", ChannelId: "UCzQUP1qoWDoEbmsQxvdjxgQ", ImageID: "joe.jpg", Type: "youtube"},
-	"Mixhound":            {Name: "Mixhound", ChannelId: "UC_jxnWLGJ2eQK4en3UblKEw", ImageID: "mix.jpg", Type: "youtube"},
-	"Destiny":             {Name: "Destiny", Type: "twitch", ImageID: "destiny.jpg"},
-	"Richardlewisreports": {Name: "Richardlewisreports", Type: "twitch", ImageID: "richardlewis.jpeg"},
-	"Cjayride":            {Name: "Cjayride", Type: "twitch", ImageID: "cjayride.jpg"},
-	"Hitch":               {Name: "Hitch", Type: "twitch", ImageID: "hitch.jpg"},
-	"Rajjpatel":           {Name: "Rajjpatel", Type: "twitch", ImageID: "rajjpatel.jpg"},
-	"TrainwrecksTv":       {Name: "TrainwrecksTv", Type: "twitch", ImageID: "trainwreckstv.jpg"},
-	"GreekGodx":           {Name: "GreekGodx", Type: "twitch", ImageID: "greekgodx.jpeg"},
-	"EsfandTV":            {Name: "EsfandTV", Type: "twitch", ImageID: "esfandtv.jpeg"},
-	"Alecludford":         {Name: "Alecludford", Type: "twitch", ImageID: "alecludford.jpeg"},
-	"Knightsinclair":      {Name: "Knightsinclair", Type: "twitch", ImageID: "knightsinclair.jpg"},
-	"Dkane":               {Name: "Dkane", Type: "twitch", ImageID: "dkane.png "},
-	"HyphonixTwitch":      {Name: "Hyphonix", Type: "twitch", ImageID: "hyphonixtwitch.jpeg"},
-	"staysafetv":          {Name: "staysafetv", Type: "twitch", ImageID: "staysafetv.jpeg"},
 }
 var (
 	waiter sync.WaitGroup
@@ -148,8 +126,8 @@ func Listener(h *Hub) {
 }
 func (s Streamer) getData() {
 	defer waiter.Done()
+	results := Newlive{}
 	if s.Type == "youtube" {
-		return
 		url := fmt.Sprintf("https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=%v&eventType=live&type=video&key=%v", s.ChannelId, os.Getenv("KEY"))
 		resp, err := http.Get(url)
 		if err != nil || resp.StatusCode != 200 {
@@ -165,6 +143,13 @@ func (s Streamer) getData() {
 		var streamer Islive
 		json.Unmarshal(body, &streamer)
 		if streamer.PageInfo.TotalResults == 0 {
+			results.Name = &s.Name
+			results.ImageID = &s.ImageID
+			results.ChannelID = &s.ChannelId
+			results.Type = s.Type
+			results.Viewers = 0
+			results.Online = false
+			ch <- results
 			return
 		}
 		streamer.Name = s.Name
@@ -193,20 +178,20 @@ func (s Streamer) getData() {
 			thumb.High = &live.Items[0].Snippet.Thumbnails.Maxres.URL
 		}
 
-		rz := Newlive{
-			Name:        &streamer.Name,
-			ImageID:     &streamer.ImageID,
-			ChannelID:   &live.Items[0].Snippet.ChannelID,
-			Title:       &live.Items[0].Snippet.Title,
-			Description: &live.Items[0].Snippet.Description,
-			Viewers:     &name,
-			Likes:       &live.Items[0].Statistics.LikeCount,
-			Dislikes:    &live.Items[0].Statistics.DislikeCount,
-			VideoID:     &live.Items[0].ID,
-			Thumbnail:   thumb,
-			Type:        "youtube",
-		}
-		ch <- rz
+		results.Name = &streamer.Name
+		results.ChannelID = &live.Items[0].Snippet.ChannelID
+		results.ImageID = &streamer.ImageID
+		results.Likes = &live.Items[0].Statistics.LikeCount
+		results.Dislikes = &live.Items[0].Statistics.DislikeCount
+		results.Title = &live.Items[0].Snippet.Title
+		results.Description = &live.Items[0].Snippet.Description
+		results.Thumbnail = thumb
+		results.Viewers = name
+		results.Name = &streamer.Name
+		results.VideoID = &live.Items[0].ID
+		results.Online = true
+		results.Type = "youtube"
+		ch <- results
 	} else if s.Type == "twitch" {
 		url := fmt.Sprintf("https://api.twitch.tv/kraken/streams/%v?client_id=%v", s.Name, os.Getenv("TWITCH"))
 		rz, err := http.Get(url)
@@ -218,22 +203,30 @@ func (s Streamer) getData() {
 		var res TwitchResponse
 		json.Unmarshal(body, &res)
 		if res.Stream.Channel.Status == nil {
+			results.Name = &s.Name
+			results.ImageID = &s.ImageID
+			results.ChannelID = &s.ChannelId
+			results.Type = s.Type
+			results.Viewers = 0
+			results.Online = false
+			ch <- results
 			return
 		}
 		thumb := Thumbnails{High: res.Stream.Preview.Large, Low: res.Stream.Preview.Medium}
-		result := Newlive{
-			ChannelID:   &res.Stream.Channel.Name,
-			Name:        &res.Stream.Channel.Name,
-			ImageID:     &res.Stream.Channel.Logo,
-			VideoID:     &res.Stream.Channel.Name,
-			Title:       res.Stream.Channel.Status,
-			Viewers:     res.Stream.Viewers,
-			Thumbnail:   thumb,
-			DisplayName: &res.Stream.Channel.DisplayName,
-			IsPlaying:   res.Stream.Game,
-			Mature:      &res.Stream.Channel.Mature,
-			Type:        "twitch",
-		}
-		ch <- result
+
+		results.ChannelID = &res.Stream.Channel.Name
+		results.Name = &res.Stream.Channel.Name
+		results.ImageID = &res.Stream.Channel.Logo
+		results.VideoID = &res.Stream.Channel.Name
+		results.Title = res.Stream.Channel.Status
+		results.Viewers = *res.Stream.Viewers
+		results.Thumbnail = thumb
+		results.DisplayName = &res.Stream.Channel.DisplayName
+		results.IsPlaying = res.Stream.Game
+		results.Mature = &res.Stream.Channel.Mature
+		results.Online = true
+		results.Type = "twitch"
+
+		ch <- results
 	}
 }

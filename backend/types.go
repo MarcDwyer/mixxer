@@ -138,7 +138,7 @@ type ByViewers []Newlive
 func (a ByViewers) Len() int      { return len(a) }
 func (a ByViewers) Swap(i, j int) { a[i], a[j] = a[j], a[i] }
 func (a ByViewers) Less(i, j int) bool {
-	return *a[i].Viewers > *a[j].Viewers
+	return a[i].Viewers > a[j].Viewers
 }
 
 type Random []Streamer

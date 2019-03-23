@@ -3,6 +3,8 @@ import Homepage from '../homepage/homepage'
 import Videoplayer from '../streamer-page/videoplayer'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
+import Navbar from '../navbar/navbar'
+
 export interface LiveStreams {
     title: string;
     name: string;
@@ -17,6 +19,7 @@ export interface LiveStreams {
     displayName: string | null;
     isPlaying: string | null;
     Mature: boolean | null;
+    online: boolean;
     type: string;
 }
 interface Thumbnail {
@@ -44,6 +47,7 @@ class Main extends Component<{}, State> {
                 obj[item.name] = item
                 return obj
             }, {})
+            console.log(newPayload)
             this.setState({ live: newPayload })
         })
     }
@@ -51,6 +55,7 @@ class Main extends Component<{}, State> {
         const { live } = this.state
         return (
             <BrowserRouter>
+            <Navbar />
                 {live && (
                     <Switch>
                         <Route path="/:id" render={(props) => <Videoplayer {...props} live={this.state.live} />} />

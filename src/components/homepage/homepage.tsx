@@ -12,9 +12,12 @@ const Homepage = (props: Props) => {
         <div className="container">
             <h2>Top Streams</h2>
             <div className="card-grid">
-            {live && Object.values(live).map((item) => (
-                    <Card key={item.channelId} streamer={item} />
-                ))}
+            {live && Object.values(live).map((item) => {
+                if (!item.online) return
+                    return (
+                        <Card key={item.channelId} streamer={item} />
+                    )
+            })}
             </div>
         </div>
     )
