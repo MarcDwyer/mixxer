@@ -15,7 +15,6 @@ const Card = (props: Props) => {
     const [hover, setHover] = useState<boolean>(false)
 
     const newtitle = streamer.title.slice(0, 28)
-    console.log(streamer.description)
     return (
         <Link
             to={`/${streamer.name}`}
