@@ -72,7 +72,7 @@ type TheStreamers map[string]Streamer
 
 var streamers = []Streamer{
 	{Name: "iceposeidon", ChannelId: "UCv9Edl_WbtbPeURPtFDo-uA", ImageID: "ice.jpg", Type: "youtube"},
-	{Name: "hyphonix", ChannelId: "UCaFpm67qMk1W1wJkFhGXucA", ImageID: "hyphonix.jpg", Type: "youtube"},
+	{Name: "hyphonixyoutube", ChannelId: "UCaFpm67qMk1W1wJkFhGXucA", ImageID: "hyphonix.jpg", Type: "youtube"},
 	{Name: "gary", ChannelId: "UCvxSwu13u1wWyROPlCH-MZg", ImageID: "gary.jpg", Type: "youtube"},
 	{Name: "cxnews", ChannelId: "UCStEQ9BjMLjHTHLNA6cY9vg", ImageID: "cxnews.jpg", Type: "youtube"},
 	{Name: "jaunbagnell", ChannelId: "UCvhnYODy6WQ0mw_zi3V1h0g", ImageID: "juan.jpg", Type: "youtube"},

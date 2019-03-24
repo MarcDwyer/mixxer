@@ -47,7 +47,6 @@ class Main extends Component<{}, State> {
                 obj[item.name] = item
                 return obj
             }, {})
-            console.log(newPayload)
             this.setState({ live: newPayload })
         })
     }
