@@ -6,7 +6,7 @@ import './navbar-styles.scss'
 const Navbar = () => {
     return (
         <nav>
-            <Link className="logo" to="/">The Network</Link>
+            <Link className="logo" to="/">TwitchTube</Link>
         </nav>
     )
 }

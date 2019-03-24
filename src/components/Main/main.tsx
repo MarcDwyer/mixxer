@@ -43,6 +43,7 @@ class Main extends Component<{}, State> {
 
         ws.addEventListener('message', (msg) => {
             const payload: LiveStreams[] = JSON.parse(msg.data)
+            if (!payload) return
             const newPayload: AllStreams = payload.reduce((obj: AllStreams, item) => {
                 obj[item.name] = item
                 return obj

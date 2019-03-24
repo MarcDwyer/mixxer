@@ -3,11 +3,11 @@ nav {
     position: sticky;
     top: 0;
     height: 55px;
-    background-color: #25252E;
-    box-shadow: .5px .5px black;
+    background-color: rgba(37,37,46, 1);
     display: flex;
     .logo {
         margin: auto auto auto 15px;
+        opacity: 1;
         font-weight: bold;
         font-size: 33px;
     }

@@ -3,9 +3,30 @@
     margin-left: auto;
     margin-right: auto;
 
+.home-header {
+    display: flex;
+
+    input {
+        margin: auto 10px auto auto;
+        background-color: rgba(37,37,46, 1);
+        height: 25px;
+        width: 285px;
+        padding: 10px 10px;
+        color: #eee;
+        outline: none;
+        border: none;
+    }
+}
 .card-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     column-gap: 10px;
+}
+
+.offline-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 10px;
+
 }
 }

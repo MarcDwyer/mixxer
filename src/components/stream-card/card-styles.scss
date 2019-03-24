@@ -7,8 +7,10 @@
     margin-bottom: 10px;
 
     &:hover {
-        border: solid 1px #4444E5;
-        box-shadow: 1px 1px #4444E5
+        box-shadow: 2px 2px rgba(36, 141, 228, 0.75);
+        -webkit-box-shadow: 0 0 5px 2px rgba(36, 141, 228, 0.75);
+        -moz-box-shadow: 0 0 5px 2px rgba(36, 141, 228, 0.75);
+        box-shadow: 0 0 5px 2px rgba(36, 141, 228, 0.75);
     }
 
     .captain {
@@ -20,21 +22,23 @@
     
 
         .viewers {
-            width: 55px;
             background-color: rgba(0,0,0,.75);
             position: absolute;
             top: 5px;
             left: 5px;
+            padding: 2px 2px;
             border-radius: 5px;
             font-size: 14px;
             display: flex;
             text-align: center;
+            color: #eee;
 
             i {
                 color: #eee;
                 margin: auto;
             }
             span {
+                padding: px 2px;
                 margin: auto auto auto 5px;
             }
         }

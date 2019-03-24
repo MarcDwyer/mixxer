@@ -45,9 +45,23 @@
             position: absolute;
             right: 5px;
             bottom: 5px;
-            font-size: 14px;
+            font-size: 12px;
             opacity: .75;
         }
+        }
+
+        .header {
+            padding: 10px 10px;
+            display: flex;
+            
+            h4 {
+                padding: 0;
+                margin: 0;
+            }
+            span {
+                margin: auto 5px 0 auto;
+                cursor: pointer;
+            }
         }
     }
 }

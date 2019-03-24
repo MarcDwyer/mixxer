@@ -34,7 +34,7 @@ const Card = (props: Props) => {
                         <div className="info">
                             <span className="title">{newtitle + '...'}</span>
                             <span>{streamer.displayName || streamer.name}</span>
-                            <span>{streamer.isPlaying || ""}</span>
+                            <span>{streamer.isPlaying || "Just Chatting"}</span>
                         </div>
                     </div>
                 </div>
