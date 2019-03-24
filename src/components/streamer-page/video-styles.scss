@@ -1,0 +1,41 @@
+.video-parent {
+    height: calc(100vh - 60px);
+    display: flex;
+    overflow: hidden;
+
+    .video-player {
+        width: 100%;
+        margin-left: 10px;
+        margin-right: 10px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+
+        iframe {
+            width: 100%;
+            height: calc(100vh - 225px);
+        }
+
+        .stream-title {
+            display: flex;
+            width: 100%;
+        
+            span {
+                margin: auto 10px auto auto;
+            }
+        }
+    }
+    .stream-info {
+        display: flex;
+    }
+
+    .chat {
+        width: 550px;
+        height: calc(100vh - 55px);
+
+        iframe {
+            height: 100%;
+            width: 100%;
+        }
+    }
+}

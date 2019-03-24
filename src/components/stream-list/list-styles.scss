@@ -1,0 +1,53 @@
+.list-parent {
+    height: 100%;
+    width: 375px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    border-right: 1px solid rgba(55,65,80, .45); 
+
+    h4 {
+        margin-left: 5px;
+    }
+    .list {
+        display: flex;
+        flex-direction: column;
+        margin-top: 5px;
+
+        img {
+            height: 40px;
+            width: 40px;
+        }
+
+        .stream-list {
+            display: flex;
+            margin: 5px;
+            padding: 5px 5px;
+            &:hover {
+                background-color: rgba(55,65,80, .45);
+            }
+        }
+
+        .stream-info {
+        display: flex;
+        flex-direction: column;
+        margin-left: 5px;
+        width: 100%;
+        position: relative;
+        .name {
+            text-transform: capitalize;
+        }
+        .isplaying {
+            opacity: .75;
+            font-size: 12px;
+        }
+        .viewer-count {
+            position: absolute;
+            right: 5px;
+            bottom: 5px;
+            font-size: 14px;
+            opacity: .75;
+        }
+        }
+    }
+}

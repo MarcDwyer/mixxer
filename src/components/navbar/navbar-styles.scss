@@ -1,0 +1,14 @@
+nav {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    height: 55px;
+    background-color: #25252E;
+    box-shadow: .5px .5px black;
+    display: flex;
+    .logo {
+        margin: auto auto auto 15px;
+        font-weight: bold;
+        font-size: 33px;
+    }
+}
