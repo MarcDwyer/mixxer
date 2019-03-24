@@ -54,7 +54,12 @@ class Main extends Component<{}, State> {
         const { live } = this.state
         return (
             <BrowserRouter>
-            <Navbar />
+                <Navbar />
+                {!live && (
+                    <div className="container">
+                        <h2>No streamers online...</h2>
+                    </div>
+                )}
                 {live && (
                     <Switch>
                         <Route path="/:id" render={(props) => <Videoplayer {...props} live={this.state.live} />} />
