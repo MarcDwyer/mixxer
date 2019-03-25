@@ -32,7 +32,7 @@ const Homepage = (props: Props) => {
                 <input
                     value={txt}
                     onChange={(e) => setTxt(e.target.value)}
-                    placeholder="Search online streams"
+                    placeholder="Search streamers"
                 />
             </div>
             <div className="card-grid">
@@ -48,7 +48,7 @@ const Homepage = (props: Props) => {
                 {live && Object.values(live).map((item, i) => {
                     if (item.online) return
                     return (
-                        <OfflineCard stream={item} />
+                        <OfflineCard key={item.imageId} stream={item} />
                     )
                 })}
             </div>

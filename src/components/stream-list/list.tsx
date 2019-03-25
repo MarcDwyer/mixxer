@@ -49,7 +49,7 @@ const List = (props: Props) => {
                     const image: string = item.imageId.startsWith("https") ? item.imageId : `https://s3.us-east-2.amazonaws.com/xhnetwork/${item.imageId}`
                     if (i > index) return
                     return (
-                        <div className="stream-list">
+                        <div className="stream-list" key={item.imageId}>
                             <img src={image} alt="offline" />
                             <div className="stream-info">
                                 <span className="name">{item.name}</span>

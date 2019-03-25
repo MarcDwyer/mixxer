@@ -45,7 +45,7 @@ class Main extends Component<{}, State> {
             const payload: LiveStreams[] = JSON.parse(msg.data)
             if (!payload) return
             const newPayload: AllStreams = payload.reduce((obj: AllStreams, item) => {
-                obj[item.name] = item
+                obj[item.name.toLowerCase()] = item
                 return obj
             }, {})
             this.setState({ live: newPayload })

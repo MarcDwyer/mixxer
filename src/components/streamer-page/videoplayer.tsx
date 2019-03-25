@@ -22,15 +22,15 @@ const Videoplayer = (props: Props) => {
             <div className="video-player">
                 <iframe src={vidUrl} frameBorder="0" />
                 <div className="stream-title">
-                    <h2>{stream.title}</h2>
+                    <h3>{stream.title}</h3>
                     <span><i className="fas fa-eye" /> {stream.viewers} viewers</span>
                 </div>
                 <div className="stream-info">
-                    <span>{(() => {
+                    <span className="isPlaying">{(() => {
                         if (!stream.online) {
                             return `${stream.name} is offline`
                         } else {
-                            return `${ stream.displayName || stream.name} is playing ${stream.isPlaying || "Just Chatting"}`
+                            return `${stream.displayName || stream.name} is playing ${stream.isPlaying || "Just Chatting"}`
                         }
                     })()}</span>
                 </div>
