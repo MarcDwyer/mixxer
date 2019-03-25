@@ -2,7 +2,9 @@
     height: calc(100vh - 60px);
     display: flex;
     overflow: hidden;
-
+ @media (max-width: 1250px) {
+     flex-direction: column;
+ }
     .video-player {
         width: 100%;
         margin-left: 10px;
@@ -27,15 +29,23 @@
     }
     .stream-info {
         display: flex;
+
+        @media (max-width: 1250px) {
+           display: none;
+        }
     }
 
     .chat {
-        width: 550px;
+        flex: 0 0 400px;
         height: calc(100vh - 55px);
 
         iframe {
             height: 100%;
             width: 100%;
         }
+        
+        @media (max-width: 1250px) {
+            height: 25%;
+         }
     }
 }

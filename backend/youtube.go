@@ -93,6 +93,7 @@ var streamers = []Streamer{
 	{Name: "hyphonix", Type: "twitch", ImageID: "hyphonixtwitch.jpeg"},
 	{Name: "staysafetv", Type: "twitch", ImageID: "staysafetv.png"},
 	{Name: "jaycgee", Type: "twitch", ImageID: "jaycgee.png"},
+	{Name: "miltontpike1", Type: "twitch", ImageID: "miltontpike1.jpeg"},
 }
 var (
 	waiter sync.WaitGroup

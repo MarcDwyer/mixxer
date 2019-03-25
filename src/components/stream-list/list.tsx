@@ -6,6 +6,7 @@ interface Props {
     live: AllStreams;
 }
 const List = (props: Props) => {
+    if (window.innerWidth < 1250) return null
     const { live } = props
     const online = Object.values(live).filter(item => item.online)
     const offline = Object.values(live).filter(item => !item.online)

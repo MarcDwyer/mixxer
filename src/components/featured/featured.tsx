@@ -10,6 +10,7 @@ interface Props {
 }
 
 const Featured = (props: Props) => {
+    if (window.innerWidth < 1000) return null
     const online = Object.values(props.live).filter(item => item.online)
 
     const featuredStream = online[0]
