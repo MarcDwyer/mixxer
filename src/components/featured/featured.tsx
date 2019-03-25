@@ -2,8 +2,6 @@ import React from 'react'
 import { AllStreams } from '../Main/main'
 import { Link } from 'react-router-dom'
 import './featured-styles.scss'
-import 'pure-react-carousel/dist/react-carousel.es.css';
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 
 interface Props {
     live: AllStreams;
