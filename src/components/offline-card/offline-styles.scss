@@ -1,0 +1,23 @@
+.offline-card {
+    background-color: rgba(37,37,46, .75);
+    width: 325px;
+    height: 225px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    display: flex;
+
+    .off {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        text-align: center;
+        text-transform: capitalize;
+
+        img {
+            margin: auto;
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+        }
+    }
+}
