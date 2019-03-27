@@ -21,12 +21,21 @@ const List = (props: Props) => {
                 <h4>Online Channels</h4>
                 {online.map((item, i) => {
                     const image: string = item.imageId.startsWith("https") ? item.imageId : `https://s3.us-east-2.amazonaws.com/xhnetwork/${item.imageId}`
+                    const isPlaying = item.isPlaying ? item.isPlaying.slice(0, 22) : "Just Chatting"
                     return (
                         <Link to={`/${item.name}`} className="stream-list" key={item.channelId}>
                             <img src={image} alt="streamer" />
                             <div className="stream-info">
                                 <span className="name">{item.name}</span>
-                                <span className="isplaying">{item.isPlaying || "Just chatting"}</span>
+                                <span className="isplaying">{(() => {
+                                    if (item.isPlaying && item.isPlaying.length > 22) {
+                                        return `${item.isPlaying.slice(0, 18)}...`
+                                    } else if (item.isPlaying) {
+                                        return item.isPlaying
+                                    } else {
+                                        return "Just Chatting"
+                                    }
+                                })()}</span>
                                 <span className="viewer-count">{item.viewers} viewers</span>
                             </div>
                         </Link>

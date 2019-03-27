@@ -5,6 +5,7 @@ import './homepage.scss'
 import Card from '../stream-card/card'
 import Featured from '../featured/featured'
 import OfflineCard from '../offline-card/offline'
+import Footer from '../footer/footer'
 
 interface Props {
     live: AllStreams | null;
@@ -25,33 +26,36 @@ const Homepage = (props: Props) => {
         setSearch(filtered)
     }, [txt])
     return (
-        <div className="container">
-            <Featured live={live} />
-            <div className="home-header">
-                <h2>Top Streams</h2>
-                <input
-                    value={txt}
-                    onChange={(e) => setTxt(e.target.value)}
-                    placeholder="Search streamers"
-                />
+        <div className="parent">
+            <div className="container">
+                <Featured live={live} />
+                <div className="home-header">
+                    <h2>Top Streams</h2>
+                    <input
+                        value={txt}
+                        onChange={(e) => setTxt(e.target.value)}
+                        placeholder="Search streamers"
+                    />
+                </div>
+                <div className="card-grid">
+                    {live && search.map((item) => {
+                        if (!item.online) return
+                        return (
+                            <Card key={item.channelId} streamer={item} />
+                        )
+                    })}
+                </div>
+                <h2>Offline Streams</h2>
+                <div className="offline-grid">
+                    {live && Object.values(live).map((item, i) => {
+                        if (item.online) return
+                        return (
+                            <OfflineCard key={item.imageId} stream={item} />
+                        )
+                    })}
+                </div>
             </div>
-            <div className="card-grid">
-                {live && search.map((item) => {
-                    if (!item.online) return
-                    return (
-                        <Card key={item.channelId} streamer={item} />
-                    )
-                })}
-            </div>
-            <h2>Offline Streams</h2>
-            <div className="offline-grid">
-                {live && Object.values(live).map((item, i) => {
-                    if (item.online) return
-                    return (
-                        <OfflineCard key={item.imageId} stream={item} />
-                    )
-                })}
-            </div>
+            <Footer />
         </div>
     )
 }

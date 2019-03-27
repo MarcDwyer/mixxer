@@ -4,7 +4,6 @@ import Videoplayer from '../streamer-page/videoplayer'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import Navbar from '../navbar/navbar'
-
 export interface LiveStreams {
     title: string;
     name: string;

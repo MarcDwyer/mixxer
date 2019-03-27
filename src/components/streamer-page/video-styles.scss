@@ -29,9 +29,16 @@
     }
     .stream-info {
         display: flex;
-
+        flex-direction: column;
         @media (max-width: 1250px) {
            display: none;
+        }
+
+        .isPlaying {
+            font-weight: bold;
+        }
+        p {
+            font-size: 14px;
         }
     }
 

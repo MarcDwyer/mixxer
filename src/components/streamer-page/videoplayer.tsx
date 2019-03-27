@@ -14,6 +14,10 @@ const Videoplayer = (props: Props) => {
     const { live } = props
     if (!live) return null
     const stream = live[newid]
+    if (!stream) {
+        props.history.push("/")
+        return null
+    }
     const vidUrl: string = stream.type && stream.type === "youtube" ? `https://www.youtube.com/embed/${stream.videoId}?autoplay=1&amp;showinfo=0&amp;modestbranding=1&amp;enablejsapi=1&amp` : `https://player.twitch.tv/?channel=${stream.name}&muted=false`;
     const chatUrl: string = stream.type && stream.type === "youtube" ? `https://www.youtube.com/live_chat?v=${stream.videoId}&embed_domain=${window.location.hostname}` : `https://www.twitch.tv/embed/${stream.name}/chat?darkpopout`;
     return (
@@ -33,6 +37,9 @@ const Videoplayer = (props: Props) => {
                             return `${stream.displayName || stream.name} is playing ${stream.isPlaying || "Just Chatting"}`
                         }
                     })()}</span>
+                    {stream.description && (
+                        <p>{stream.description}</p>
+                    )}
                 </div>
             </div>
             <div className="chat">

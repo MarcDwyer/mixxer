@@ -12,9 +12,18 @@ const OfflineCard = (props: Props) => {
     return (
         <div className="offline-card">
             <div className="off">
-                <img src={image} alt="stream"/>
+                <img src={image} alt="stream" />
                 <h3>{stream.name}</h3>
-                <span>{stream.type}</span>
+                {stream.type === "twitch" && (
+                    <a target="_blank" href={`https://www.twitch.tv/${stream.name}`}>
+                        <i className="fab fa-twitch" />
+                    </a>
+                )}
+                {stream.type === "youtube" && (
+                    <a target="_blank" href={`https://www.youtube.com/channel/${stream.channelId}`}>
+                        <i className="fab fa-youtube" />
+                    </a>
+                )}
             </div>
         </div>
     )
