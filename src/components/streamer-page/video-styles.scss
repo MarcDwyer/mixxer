@@ -1,58 +1,83 @@
 .video-parent {
-    height: calc(100vh - 60px);
     display: flex;
+    height: 100%;
     overflow: hidden;
- @media (max-width: 1250px) {
-     flex-direction: column;
- }
+
+    @media (max-width: 1250px) {
+        flex-direction: column;
+    }
+
     .video-player {
         width: 100%;
         margin-left: 10px;
         margin-right: 10px;
-        overflow-y: auto;
         display: flex;
         flex-direction: column;
+        min-height: calc(100vh - 65px);
+        overflow-y: auto !important;
+        overflow-x: hidden;
+    
+
+        @media (max-width: 1250px) {
+            margin: auto !important;
+        }
 
         iframe {
             width: 100%;
             height: calc(100vh - 225px);
+            border: solid 1px teal;
         }
 
-        .stream-title {
-            display: flex;
+
+        .details {
             width: 100%;
-        
-            span {
-                margin: auto 10px auto auto;
+            display: flex;
+            min-height: 100px;
+            flex-direction: column;
+
+            .stream-title {
+                display: flex;
+
+
+                @media (max-width: 1250px) {
+                    display: none;
+                }
+
+                span {
+                    margin: auto 10px auto auto;
+                }
             }
         }
-    }
-    .stream-info {
-        display: flex;
-        flex-direction: column;
-        @media (max-width: 1250px) {
-           display: none;
-        }
 
-        .isPlaying {
-            font-weight: bold;
-        }
-        p {
-            font-size: 14px;
+        .stream-info {
+            display: flex;
+            flex-direction: column;
+
+            @media (max-width: 1250px) {
+                display: none;
+            }
+
+            .isPlaying {
+                font-weight: bold;
+            }
+
+            p {
+                font-size: 14px;
+            }
         }
     }
 
     .chat {
         flex: 0 0 400px;
-        height: calc(100vh - 55px);
+        height: calc(100vh - 65px);
 
         iframe {
             height: 100%;
             width: 100%;
         }
-        
+
         @media (max-width: 1250px) {
             height: 25%;
-         }
+        }
     }
 }

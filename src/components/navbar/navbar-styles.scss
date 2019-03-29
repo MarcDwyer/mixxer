@@ -6,6 +6,7 @@ nav {
     background-color: rgba(37,37,46, 1);
     display: flex;
     font-family: 'Lobster', cursive;
+    z-index: 1000;
 
     .logo {
         margin: auto auto auto 15px;

@@ -9,20 +9,19 @@ import Footer from '../footer/footer'
 
 interface Props {
     live: AllStreams | null;
+    offline: LiveStreams[] | null;
 }
 const Homepage = (props: Props) => {
-    const { live } = props
+    const { live, offline } = props
     if (!live) return null
 
-    const online: LiveStreams[] = Object.values(live).filter(item => item.online)
-
     const [txt, setTxt] = useState<string>('')
-    const [search, setSearch] = useState<LiveStreams[]>(online)
+    const [search, setSearch] = useState<LiveStreams[]>(Object.values(live))
 
 
     useEffect(() => {
         const newTxt = txt.toLowerCase()
-        const filtered = online.filter(item => item.name.includes(newTxt))
+        const filtered = Object.values(live).filter(item => item.name.includes(newTxt))
         setSearch(filtered)
     }, [txt])
     return (
@@ -38,7 +37,7 @@ const Homepage = (props: Props) => {
                     />
                 </div>
                 <div className="card-grid">
-                    {live && search.map((item) => {
+                    {search.map((item) => {
                         if (!item.online) return
                         return (
                             <Card key={item.channelId} streamer={item} />
@@ -47,7 +46,7 @@ const Homepage = (props: Props) => {
                 </div>
                 <h2>Offline Streams</h2>
                 <div className="offline-grid">
-                    {live && Object.values(live).map((item, i) => {
+                    {offline && offline.map((item) => {
                         if (item.online) return
                         return (
                             <OfflineCard key={item.imageId} stream={item} />

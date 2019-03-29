@@ -94,11 +94,15 @@ var streamers = []Streamer{
 	{Name: "staysafetv", Type: "twitch", ImageID: "staysafetv.png"},
 	{Name: "jaycgee", Type: "twitch", ImageID: "jaycgee.png"},
 	{Name: "miltontpike1", Type: "twitch", ImageID: "miltontpike1.jpeg"},
+	{Name: "mizkif", Type: "twitch", ImageID: "mizkif.jpeg"},
+	{Name: "roystang", Type: "twitch", ImageID: "marc.jpeg"},
 }
+
 var (
-	waiter sync.WaitGroup
-	ch     = make(chan Newlive)
-	isDone = make(chan bool)
+	waiter  sync.WaitGroup
+	ch      = make(chan Newlive)
+	isDone  = make(chan bool)
+	counter int
 )
 
 func getStreamData() {
@@ -125,6 +129,12 @@ func Listener(h *Hub) {
 		}
 	}
 }
+
+type NewStream struct {
+	Name string `json:"name"`
+	Type string `json:"type"`
+}
+
 func (s Streamer) getData() {
 	defer waiter.Done()
 	results := Newlive{}
@@ -172,7 +182,6 @@ func (s Streamer) getData() {
 		name, err := strconv.Atoi(live.Items[0].LiveStreamingDetails.ConcurrentViewers)
 		if err != nil {
 			fmt.Println(err)
-			return
 		}
 		thumb := Thumbnails{Low: &live.Items[0].Snippet.Thumbnails.High.URL}
 		if len(live.Items[0].Snippet.Thumbnails.Maxres.URL) > 0 {

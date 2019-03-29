@@ -1,4 +1,7 @@
 .parent {
+    border: solid 1px green;
+    overflow-y: auto;
+    height: 100%;
 
     .container {
         width: 1440px;
@@ -6,7 +9,9 @@
         margin-right: auto;
         display: flex;
         flex-direction: column;
-
+        h2 {
+            margin-left: 5px;
+        }
         @media (max-width: 1500px) {
             width: 100%;
         }
@@ -27,8 +32,6 @@
                 input {
                     width: 90% !important;
                     margin: 25px auto 25px auto !important;
-                    border: solid 1px red;
-                    color: red;
                 }
             }
 
@@ -52,6 +55,8 @@
 
             @media (max-width: 1330px) {
                 grid-template-columns: repeat(3, 1fr);
+                width: 95% !important;
+                margin: auto ;
             }
 
             @media (max-width: 950px) {
@@ -69,7 +74,8 @@
             column-gap: 10px;
 
             @media (max-width: 1500px) {
-                width: 100% !important;
+                width: 95% !important;
+                margin: auto ;
                 grid-template-columns: repeat(4, 1fr);
             }
 

@@ -1,0 +1,8 @@
+.container-loader {
+    display: flex;
+    height: calc(100vh - 55px);
+
+    & * {
+      margin: auto;  
+    }
+}

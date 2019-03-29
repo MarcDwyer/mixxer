@@ -33,7 +33,7 @@ func main() {
 	go Listener(hub)
 	go getStreamData()
 	go func() {
-		pollInterval := 10
+		pollInterval := 15
 
 		timerCh := time.Tick(time.Duration(pollInterval) * time.Minute)
 		for range timerCh {
