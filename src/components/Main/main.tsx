@@ -33,33 +33,28 @@ export interface AllStreams {
 }
 interface State {
     live: AllStreams | null;
-    offline: LiveStreams[] | null;
     ws: WebSocket;
 }
 class Main extends Component<{}, State> {
     state = {
         live: null,
-        offline: null,
-        ws: new WebSocket(`ws://${document.location.hostname}:5000/sockets/`)
+        ws: new WebSocket(`wss://${document.location.host}/sockets/`)
     }
     componentDidMount() {
         const { ws } = this.state
 
         ws.addEventListener('message', (msg) => {
             const payload: LiveStreams[] = JSON.parse(msg.data)
-            console.log(payload)
             if (!payload) return
-            const online = payload.filter(item => item.online)
-            const offline = payload.filter(item => !item.online)
-            const newPayload: AllStreams = online.reduce((obj: AllStreams, item) => {
+            const newPayload: AllStreams = payload.reduce((obj: AllStreams, item) => {
                 obj[item.name.toLowerCase()] = item
                 return obj
             }, {})
-            this.setState({ live: newPayload, offline })
+            this.setState({ live: newPayload })
         })
     }
     render() {
-        const { live, offline } = this.state
+        const { live } = this.state
         return (
             <BrowserRouter>
                 <Navbar />
@@ -73,10 +68,10 @@ class Main extends Component<{}, State> {
                         />
                     </div>
                 )}
-                {live && offline && (
+                {live && (
                     <Switch>
-                        <Route path="/:id" render={(props) => <Videoplayer {...props} live={this.state.live} offline={this.state.offline} />} />
-                        <Route path="/" render={(props) => <Homepage {...props} live={this.state.live} offline={this.state.offline} />} />
+                        <Route path="/:id" render={(props) => <Videoplayer {...props} live={this.state.live} />} />
+                        <Route path="/" render={(props) => <Homepage {...props} live={this.state.live} />} />
                     </Switch>
                 )}
             </BrowserRouter>

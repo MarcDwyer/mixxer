@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
-import { AllStreams, LiveStreams } from '../Main/main'
+import { AllStreams } from '../Main/main'
 import { Link } from 'react-router-dom'
 import './list-styles.scss'
 interface Props {
     live: AllStreams;
-    offline: LiveStreams[] | null;
 }
 const List = React.memo((props: Props) => {
     if (window.innerWidth < 1250) return null
-    const { live, offline } = props
+    const { live } = props
 
+
+    const online = Object.values(live).filter(item => item.online)
+    const offline = Object.values(live).filter(item => !item.online)
 
     const [index, setIndex] = useState<number>(6)
 
@@ -18,9 +20,8 @@ const List = React.memo((props: Props) => {
         <div className="list-parent">
             <div className="list online">
                 <h4>Online Channels</h4>
-                {Object.values(live).map((item, i) => {
+                {Object.values(online).map((item, i) => {
                     const image: string = item.imageId.startsWith("https") ? item.imageId : `https://s3.us-east-2.amazonaws.com/xhnetwork/${item.imageId}`
-                    const isPlaying = item.isPlaying ? item.isPlaying.slice(0, 22) : "Just Chatting"
                     return (
                         <Link to={`/${item.name}`} className="stream-list" key={item.channelId}>
                             <img src={image} alt="streamer" />
@@ -56,7 +57,7 @@ const List = React.memo((props: Props) => {
                         >{index === offline.length ? "Show Less" : "Show More"}</span>
                     )}
                 </div>
-                {offline && offline.map((item, i) => {
+                {offline.map((item, i) => {
                     const image: string = item.imageId.startsWith("https") ? item.imageId : `https://s3.us-east-2.amazonaws.com/xhnetwork/${item.imageId}`
                     if (i > index) return
                     return (
