@@ -14,14 +14,15 @@ const Homepage = (props: Props) => {
     const { live } = props
     if (!live) return null
 
-    const [txt, setTxt] = useState<string>('')
-    const [search, setSearch] = useState<LiveStreams[]>(Object.values(live))
-
     const online = Object.values(live).filter(item => item.online)
-    const offline = Object.values(live).filter(item => !item.online)
+    const offline = Object.values(live).filter(item => !item.online).sort((a, b) => a.name > b.name ? 1 : -1)
+
+    const [txt, setTxt] = useState<string>('')
+    const [search, setSearch] = useState<LiveStreams[]>(online)
+
     useEffect(() => {
         const newTxt = txt.toLowerCase()
-        const filtered = Object.values(live).filter(item => item.name.includes(newTxt))
+        const filtered = online.filter(item => item.name.includes(newTxt))
         setSearch(filtered)
     }, [txt])
     return (
@@ -37,7 +38,7 @@ const Homepage = (props: Props) => {
                     />
                 </div>
                 <div className="card-grid">
-                    {online.map((item) => {
+                    {search.map((item) => {
                         return (
                             <Card key={item.channelId} streamer={item} />
                         )

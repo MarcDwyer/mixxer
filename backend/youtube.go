@@ -94,8 +94,9 @@ var streamers = []Streamer{
 	{Name: "staysafetv", Type: "twitch", ImageID: "staysafetv.png"},
 	{Name: "jaycgee", Type: "twitch", ImageID: "jaycgee.png"},
 	{Name: "miltontpike1", Type: "twitch", ImageID: "miltontpike1.jpeg"},
-	{Name: "mizkif", Type: "twitch", ImageID: "mizkif.jpeg"},
-	{Name: "roystang", Type: "twitch", ImageID: "marc.jpeg"},
+	{Name: "mizkif", Type: "twitch", ImageID: "mizkif.jpg"},
+	{Name: "drdisrespect", Type: "twitch", ImageID: "drdisrespect"},
+	{Name: "riotgames", Type: "twitch", ImageID: "riotgames.jpeg"},
 }
 
 var (

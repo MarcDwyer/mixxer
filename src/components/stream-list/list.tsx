@@ -11,7 +11,7 @@ const List = React.memo((props: Props) => {
 
 
     const online = Object.values(live).filter(item => item.online)
-    const offline = Object.values(live).filter(item => !item.online)
+    const offline = Object.values(live).filter(item => !item.online).sort((a, b) => a.name > b.name ? 1 : -1)
 
     const [index, setIndex] = useState<number>(6)
 
