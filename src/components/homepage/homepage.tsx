@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { AllStreams, LiveStreams } from '../Main/main'
 import './homepage.scss'
 
-import Card from '../stream-card/card'
+import OnlineCard from '../stream-card/card'
 import Featured from '../featured/featured'
 import OfflineCard from '../offline-card/offline'
 import Footer from '../footer/footer'
@@ -40,7 +40,7 @@ const Homepage = (props: Props) => {
                 <div className="card-grid">
                     {search.map((item) => {
                         return (
-                            <Card key={item.channelId} streamer={item} />
+                            <OnlineCard key={item.channelId} streamer={item} />
                         )
                     })}
                 </div>
