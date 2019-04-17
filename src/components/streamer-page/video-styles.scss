@@ -71,7 +71,7 @@
 
     .chat {
         flex: 0 0 400px;
-        height: 100%;
+        height: calc(100vh - 55px);
         iframe {
             height: 100%;
             width: 100%;
