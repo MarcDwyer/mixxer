@@ -7,6 +7,13 @@
     border-radius: 10px;
     cursor: pointer;
 
+    &:hover {
+        box-shadow: 2px 2px rgba(36, 141, 228, 0.75);
+        -webkit-box-shadow: 0 0 5px 2px rgba(36, 141, 228, 0.75);
+        -moz-box-shadow: 0 0 5px 2px rgba(36, 141, 228, 0.75);
+        box-shadow: 0 0 5px 2px rgba(36, 141, 228, 0.75);
+    }
+
     .iframe-div {
         padding: 5px 5px;
         background-color: black;
