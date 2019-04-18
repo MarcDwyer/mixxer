@@ -38,7 +38,7 @@ interface State {
 class Main extends Component<{}, State> {
     state = {
         live: null,
-        ws: new WebSocket(`ws://${document.location.hostname}:5000/sockets/`)
+        ws: new WebSocket(`wss://${document.location.host}/sockets/`)
     }
     componentDidMount() {
         const { ws } = this.state
@@ -52,12 +52,6 @@ class Main extends Component<{}, State> {
             }, {})
             this.setState({ live: newPayload })
         })
-        this.checkService()
-    }
-    checkService = () => {
-        Notification.requestPermission((status) => {
-            console.log('Notification permission status:', status);
-        });
     }
     render() {
         const { live } = this.state 

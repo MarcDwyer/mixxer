@@ -18,7 +18,7 @@ const ParentDiv = (props: ParentProps): JSX.Element => {
                 href={`https://www.youtube.com/watch?v=${props.streamer.videoId}`}
                 className="card"
             >
-            {props.children}
+                {props.children}
             </a>
         )
     } else {
@@ -27,7 +27,7 @@ const ParentDiv = (props: ParentProps): JSX.Element => {
                 to={`/${props.streamer.name}`}
                 className="card"
             >
-            {props.children}
+                {props.children}
             </Link>
         )
     }
@@ -38,32 +38,29 @@ const Card = (props: Props) => {
 
     const newtitle = streamer.title.slice(0, 28)
     // const apple = window.innerWidth < 1250 && streamer.type === "youtube" ? (<a href={`https://www.youtube.com/watch?v=${streamer.videoId}`}></a>) : (<Link to={`/${streamer.name}`} className="card"></Link>)
-
     return (
         <ParentDiv
-        streamer={streamer}
+            streamer={streamer}
         >
-            {streamer && (
-                <div className="captain"
+            <div className="captain"
+            >
+                <div className="viewers">
+                    <i className="fas fa-eye" />
+                    <span>{streamer.viewers}</span>
+                </div>
+                <div className="image"
                 >
-                    <div className="viewers">
-                        <i className="fas fa-eye" />
-                        <span>{streamer.viewers}</span>
-                    </div>
-                    <div className="image"
-                    >
-                        <img src={streamer.thumbnails.high || streamer.thumbnails.low} alt="thumbnail" />
-                    </div>
-                    <div className="streamer-info">
-                        <img src={image} alt="streamer" />
-                        <div className="info">
-                            <span className="title">{newtitle + '...'}</span>
-                            <span>{streamer.displayName || streamer.name}</span>
-                            <span>{streamer.isPlaying || "Just Chatting"}</span>
-                        </div>
+                    <img src={streamer.thumbnails.high || streamer.thumbnails.low} alt="thumbnail" />
+                </div>
+                <div className="streamer-info">
+                    <img src={image} alt="streamer" />
+                    <div className="info">
+                        <span className="title">{newtitle + '...'}</span>
+                        <span>{streamer.displayName || streamer.name}</span>
+                        <span>{streamer.isPlaying || "Just Chatting"}</span>
                     </div>
                 </div>
-            )}
+            </div>
         </ParentDiv>
     )
 }

@@ -5,7 +5,7 @@ import './list-styles.scss'
 interface Props {
     live: AllStreams;
 }
-const List = React.memo((props: Props) => {
+const List = (props: Props) => {
     if (window.innerWidth < 1250) return null
     const { live } = props
 
@@ -72,6 +72,6 @@ const List = React.memo((props: Props) => {
             </div>
         </div>
     )
-})
+}
 
 export default List

@@ -8,7 +8,7 @@ import List from '../stream-list/list'
 interface Props extends RouteComponentProps<{ id: string }> {
     live: AllStreams | null;
 }
-const Videoplayer = React.memo((props: Props) => {
+const Videoplayer = (props: Props) => {
     const { id } = props.match.params
     const newid = id.toLocaleLowerCase()
     const { live } = props
@@ -51,6 +51,6 @@ const Videoplayer = React.memo((props: Props) => {
             </div>
         </div>
     )
-})
+}
 
 export default Videoplayer
