@@ -18,11 +18,12 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "react-spinners": "^0.5.3",
+    "sw-precache": "^5.2.1",
     "typescript": "3.3.4000"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && sw-precache --config=sw-precache-config.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

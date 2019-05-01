@@ -79,7 +79,6 @@ var streamers = []Streamer{
 	{Name: "codingtrain", ChannelId: "UCvjgXvBlbQiydffZU7m1_aw", ImageID: "coding.jpg", Type: "youtube"},
 	{Name: "joerogan", ChannelId: "UCzQUP1qoWDoEbmsQxvdjxgQ", ImageID: "joe.jpg", Type: "youtube"},
 	{Name: "mixhound", ChannelId: "UC_jxnWLGJ2eQK4en3UblKEw", ImageID: "mix.jpg", Type: "youtube"},
-	{Name: "destiny", Type: "twitch", ImageID: "destiny.jpg"},
 	{Name: "richardlewisreports", Type: "twitch", ImageID: "richardlewis.jpeg"},
 	{Name: "cjayride", Type: "twitch", ImageID: "cjayride.jpg"},
 	{Name: "hitch", Type: "twitch", ImageID: "hitch.jpg"},
