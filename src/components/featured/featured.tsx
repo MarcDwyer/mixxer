@@ -15,7 +15,7 @@ const Featured = (props: Props) => {
 
     const vidUrl: string = featuredStream.type && featuredStream.type === "youtube" ? `https://www.youtube.com/embed/${featuredStream.videoId}?autoplay=1&amp;controls=1&amp;showinfo=0&amp;modestbranding=1&amp;autohide=1&amp&mute=1&rel=0` : `https://player.twitch.tv/?channel=${featuredStream.name}&muted=false`;
     return (
-        <Link className="featured-div"
+        <Link className="featured-div default-color"
         to={`/${featuredStream.name}`}
         >
             <div className="iframe-div">

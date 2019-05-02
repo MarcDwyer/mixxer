@@ -3,10 +3,17 @@ import { Link } from 'react-router-dom'
 
 import './navbar-styles.scss'
 
-const Navbar = () => {
+interface IProps {
+    changeTheme: Function;
+}
+
+const Navbar = (props: IProps) => {
     return (
-        <nav>
+        <nav className="default-color">
             <Link className="logo" to="/">TwitchTube</Link>
+            <button
+            onClick={() => props.changeTheme()}
+            >Change Theme</button>
         </nav>
     )
 }

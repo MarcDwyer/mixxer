@@ -34,11 +34,19 @@ export interface AllStreams {
 interface State {
     live: AllStreams | null;
     ws: WebSocket;
+    isWhite: boolean;
 }
 class Main extends Component<{}, State> {
-    state = {
-        live: null,
-        ws: new WebSocket(`ws://${document.location.hostname}:5000/sockets/`)
+    constructor(props: {}) {
+        super(props)
+
+        let theme = localStorage.getItem("isDark")
+        console.log(theme)
+        this.state = {
+            live: null,
+            ws: new WebSocket(`ws://${document.location.hostname}:5000/sockets/`),
+            isWhite: false
+        }
     }
     componentDidMount() {
         const { ws } = this.state
@@ -53,11 +61,19 @@ class Main extends Component<{}, State> {
             this.setState({ live: newPayload })
         })
     }
+    componentDidUpdate(prevProps: {}, prevState: State) {
+        const { isWhite } = this.state
+        if (prevState.isWhite !== isWhite) {
+            localStorage.setItem("isWhite", JSON.stringify(isWhite))
+            this.handleTheme()
+
+        }
+    }
     render() {
         const { live } = this.state 
         return (
             <BrowserRouter>
-                <Navbar />
+                <Navbar changeTheme={this.changeTheme} />
                 {!live && (
                     <div className="container container-loader">
                         <BounceLoader
@@ -76,6 +92,26 @@ class Main extends Component<{}, State> {
                 )}
             </BrowserRouter>
         )
+    }
+    
+    changeTheme = () => {
+        this.setState({isWhite: !this.state.isWhite})
+    }
+    handleTheme = () => {
+        const { isWhite } = this.state
+        switch (isWhite) {
+            case true:
+            console.log('tru ran')
+            document.documentElement.style.setProperty('--bgcolor', "#D6D6D6");
+            document.documentElement.style.setProperty('--fontcolor', "black");
+            document.documentElement.style.setProperty('--cardcolor', "#eee");
+            break;
+            case false:
+            console.log("false ran")
+            document.documentElement.style.setProperty('--bgcolor', "#16171b");
+            document.documentElement.style.setProperty('--fontcolor', "rgba(255,255,255, .75)");
+            document.documentElement.style.setProperty('--cardcolor', "rgba(37,37,46, 1)");
+        }
     }
 }
 

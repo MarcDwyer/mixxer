@@ -25,7 +25,7 @@ const ParentDiv = (props: ParentProps): JSX.Element => {
         return (
             <Link
                 to={`/${props.streamer.name}`}
-                className="card"
+                className="card default-color"
             >
                 {props.children}
             </Link>
@@ -37,7 +37,6 @@ const Card = (props: Props) => {
     const image: string = streamer.imageId.startsWith("https") ? streamer.imageId : `https://s3.us-east-2.amazonaws.com/xhnetwork/${streamer.imageId}`
 
     const newtitle = streamer.title.slice(0, 28)
-    // const apple = window.innerWidth < 1250 && streamer.type === "youtube" ? (<a href={`https://www.youtube.com/watch?v=${streamer.videoId}`}></a>) : (<Link to={`/${streamer.name}`} className="card"></Link>)
     return (
         <ParentDiv
             streamer={streamer}

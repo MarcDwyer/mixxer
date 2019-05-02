@@ -1,10 +1,17 @@
+:root {
+  --bgcolor: #16171b;
+  --fontcolor: rgba(255,255,255, .75);
+  --cardcolor: rgba(37,37,46, 1);
+}
+
+
 body {
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #16171b;
-  color: rgba(255,255,255, .75);
+  background-color: var(--bgcolor);
+  color: var(--fontcolor);
   font-size: 100%;
   font-family: 'Poppins', sans-serif;
   width: 100%;
@@ -28,4 +35,8 @@ a {
 ::-webkit-scrollbar-thumb {
   background: #3A4246; 
   border-radius: 10px;
+}
+
+.default-color {
+  background-color: var(--cardcolor);
 }

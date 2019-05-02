@@ -10,7 +10,7 @@ const OfflineCard = (props: Props) => {
 
     const image: string = stream.imageId.startsWith("https") ? stream.imageId : `https://s3.us-east-2.amazonaws.com/xhnetwork/${stream.imageId}`
     return (
-        <div className="offline-card">
+        <div className="offline-card default-color">
             <div className="off">
                 <img src={image} alt="stream" />
                 <h3>{stream.name}</h3>

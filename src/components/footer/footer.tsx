@@ -3,7 +3,7 @@ import './footer-styles.scss'
 
 const Footer = () => {
     return (
-        <div className="footer">
+        <div className="footer default-color">
             <div className="itsme">
                 <span>Created by Marc Dwyer</span>
                 <a target="_blank" href="https://github.com/MarcDwyer">
