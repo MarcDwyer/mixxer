@@ -34,23 +34,24 @@ export interface AllStreams {
 interface State {
     live: AllStreams | null;
     ws: WebSocket;
-    isWhite: boolean;
+    isWhite: any;
 }
 class Main extends Component<{}, State> {
     constructor(props: {}) {
         super(props)
 
-        let theme = localStorage.getItem("isDark")
-        console.log(theme)
+        let theme = localStorage.getItem("isWhite")
+        if (theme) {
+            theme = JSON.parse(theme)
+        }
         this.state = {
             live: null,
-            ws: new WebSocket(`ws://${document.location.hostname}:5000/sockets/`),
-            isWhite: false
+            ws: new WebSocket(`wss://${document.location.host}/sockets/`),
+            isWhite: theme
         }
     }
     componentDidMount() {
-        const { ws } = this.state
-
+        const { ws, isWhite } = this.state
         ws.addEventListener('message', (msg) => {
             const payload: LiveStreams[] = JSON.parse(msg.data)
             if (!payload) return
@@ -60,6 +61,7 @@ class Main extends Component<{}, State> {
             }, {})
             this.setState({ live: newPayload })
         })
+        if (isWhite) this.handleTheme()
     }
     componentDidUpdate(prevProps: {}, prevState: State) {
         const { isWhite } = this.state
@@ -73,7 +75,7 @@ class Main extends Component<{}, State> {
         const { live } = this.state 
         return (
             <BrowserRouter>
-                <Navbar changeTheme={this.changeTheme} />
+                <Navbar changeTheme={this.changeTheme} isWhite={this.state.isWhite} />
                 {!live && (
                     <div className="container container-loader">
                         <BounceLoader
@@ -86,7 +88,7 @@ class Main extends Component<{}, State> {
                 )}
                 {live && (
                     <Switch>
-                        <Route path="/:id" render={(props) => <Videoplayer {...props} live={this.state.live} />} />
+                        <Route path="/:id" render={(props) => <Videoplayer {...props} live={this.state.live} isWhite={this.state.isWhite} />} />
                         <Route path="/" render={(props) => <Homepage {...props} live={this.state.live} />} />
                     </Switch>
                 )}
@@ -95,22 +97,24 @@ class Main extends Component<{}, State> {
     }
     
     changeTheme = () => {
-        this.setState({isWhite: !this.state.isWhite})
+        this.setState({isWhite: !this.state.isWhite}, () => {
+            this.handleTheme()
+        })
     }
     handleTheme = () => {
         const { isWhite } = this.state
         switch (isWhite) {
             case true:
-            console.log('tru ran')
             document.documentElement.style.setProperty('--bgcolor', "#D6D6D6");
             document.documentElement.style.setProperty('--fontcolor', "black");
             document.documentElement.style.setProperty('--cardcolor', "#eee");
+            document.documentElement.style.setProperty('--hovercolor', "white");
             break;
             case false:
-            console.log("false ran")
             document.documentElement.style.setProperty('--bgcolor', "#16171b");
-            document.documentElement.style.setProperty('--fontcolor', "rgba(255,255,255, .75)");
+            document.documentElement.style.setProperty('--fontcolor', "rgba(255,255,255, 1)");
             document.documentElement.style.setProperty('--cardcolor', "rgba(37,37,46, 1)");
+            document.documentElement.style.setProperty('--hovercolor', "rgba(55, 65, 80, .45)");
         }
     }
 }

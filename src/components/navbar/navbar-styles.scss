@@ -13,4 +13,19 @@ nav {
         font-weight: bold;
         font-size: 33px;
     }
+
+    .buttons {
+        margin: auto 15px auto auto;
+        font-family: 'Poppins', sans-serif !important;
+        height: 85%;
+        display: flex;
+
+        i {
+            margin: auto 10px auto auto;
+            font-size: 24px;
+        }
+        span {
+            margin: auto;
+        }
+    }
 }

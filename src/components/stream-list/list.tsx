@@ -23,7 +23,7 @@ const List = (props: Props) => {
                 {Object.values(online).map((item, i) => {
                     const image: string = item.imageId.startsWith("https") ? item.imageId : `https://s3.us-east-2.amazonaws.com/xhnetwork/${item.imageId}`
                     return (
-                        <Link to={`/${item.name}`} className="stream-list" key={item.channelId}>
+                        <Link to={`/${item.name}`} className="stream-list default-hover" key={item.channelId}>
                             <img src={image} alt="streamer" />
                             <div className="stream-info">
                                 <span className="name">{item.name}</span>

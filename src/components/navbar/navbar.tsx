@@ -5,15 +5,20 @@ import './navbar-styles.scss'
 
 interface IProps {
     changeTheme: Function;
+    isWhite: any;
 }
 
 const Navbar = (props: IProps) => {
     return (
         <nav className="default-color">
             <Link className="logo" to="/">TwitchTube</Link>
-            <button
-            onClick={() => props.changeTheme()}
-            >Change Theme</button>
+            <div className="buttons">
+                <i
+                    className={`fas fa-toggle-${props.isWhite ? "on greenme" : "off"} default-button`}
+                    onClick={() => props.changeTheme()}
+                />
+                <span>White theme?</span>
+            </div>
         </nav>
     )
 }

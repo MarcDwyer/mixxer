@@ -1,7 +1,9 @@
 :root {
   --bgcolor: #16171b;
-  --fontcolor: rgba(255,255,255, .75);
+  --fontcolor: rgba(255,255,255, 1);
   --cardcolor: rgba(37,37,46, 1);
+  --hovercolor: rgba(55, 65, 80, .45);
+  --buttoncolor: white;
 }
 
 
@@ -39,4 +41,12 @@ a {
 
 .default-color {
   background-color: var(--cardcolor);
+}
+
+.default-hover:hover {
+  background-color: var(--hovercolor);
+}
+
+.greenme {
+  color: #4BB543;
 }

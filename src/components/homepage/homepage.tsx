@@ -26,6 +26,7 @@ const Homepage = (props: Props) => {
                 <div className="home-header">
                     <h2>Top Streams</h2>
                     <input
+                        className="default-color"
                         value={txt}
                         onChange={(e) => setTxt(e.target.value)}
                         placeholder="Search streamers"
